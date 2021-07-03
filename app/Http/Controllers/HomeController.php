@@ -44,6 +44,11 @@ class HomeController extends Controller
      */
     public function sendNotification(Request $request)
     {
+        $this->validate($request,[
+            'title'=>'required|string|max:255',
+            'body'=>'required|string|max:255',
+        ]);
+
         $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
 
         $SERVER_API_KEY = 'AAAA8tt5hyw:APA91bHB73-niwIW4hoMa6ysPohORMEgJqOEa43GrCDqet5iuTpKymX4l1ruGBcMnQad0RoE0B0KIunhYNPgAdmPPR84Oq7SY3tctSMevQTPw2Mnld-1Mqtd_maWKXzzHAEeqgjdk-dF';
